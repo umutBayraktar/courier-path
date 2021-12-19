@@ -97,8 +97,8 @@ def find_next_order(prev_order, order_list):
     return next_order
 
 
-@app.post("/get/path/{sender_id}:")
-async def get_path(sender_id: int):
+@app.post("/get/path/{sender_id}")
+async def get_path(sender_id: int, courier_id:int):
     #import pdb; pdb.set_trace()
     sender = get_sender_object(sender_id)
     empty_orders = get_senders_empty_orders(sender_id)
@@ -112,4 +112,5 @@ async def get_path(sender_id: int):
         path_list.append(next_order)
         empty_orders.remove(next_order)
         prev_order = next_order
+    set_courier_to_orders(sender_id, courier_id)
     return {"empty_orders":empty_orders, "path_list":path_list}

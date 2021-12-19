@@ -58,6 +58,16 @@ def get_senders_empty_orders(sender_id):
     return empty_order_list
 
 
+def set_courier_to_orders(sender_id, courier_id):
+    sender = senders.find_one({"id":sender_id})
+    order_list = []
+    for order in sender["orders"]:
+        if order["courier"] == 0:
+            order["courier"] = courier_id
+        order_list.append(order)
+    senders.update_one({"id":sender_id},{"$set":{"orders":order_list}})
+
+
 def get_sender_object(sender_id):
     sender = senders.find_one({"id":sender_id})
     return sender#{"latitude":sender["latitude"],"longitude":sender["longitude"]}
