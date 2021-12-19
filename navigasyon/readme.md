@@ -19,7 +19,7 @@ Notice That! Python version should be 3.6 or upper
 
 activate environment 
 
-    source enb/bin/activate
+    source env/bin/activate
 
 go to path
 
